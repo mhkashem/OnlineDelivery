@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Product Cart</h2>
+<br />
+@if(Model != null)
+ {
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Product Name</th>
+                <th> Product Price</th>
+                <th> Quantity</th>
+                <th> Sub Total</th>
+                <th> Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                double Total = item.PQuantity * item.Productiteams.Product_Price;
+             <tr>
+                 <td>@item.Productiteams.Product_Name</td>
+                 <td>@item.Productiteams.Product_Price</td>
+                <td>
+                    @using (Html.BeginForm("Update", "Productiteams"))
+                     {
+                        <input type="number" value="@item.PQuantity" name="Product_Quantity" id="Product_Quantity"/>
+                        <input type="hidden" value="@item.Productiteams.Product_ID" name="Product_ID" id="Product_Quantity"/>
+                        <input type="image" src="~/Image/right.jpg" style=" width:40px;height:40px"/>  
+                     }
+                </td>
+                 <td>@Total</td>
+                 <td><a href="/Productiteams/Remove/@item.Productiteams.Product_ID">Delete</a></td>
+             </tr>
+             }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    <a href="/Productiteams/Checkout">Check Out</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5">Total :@Model.Total_Price()</td>
+            </tr>
+        </tfoot>
+    </table>
+ }
+ 

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<OnlineDelivery.Models.Productiteam>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Product List</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+          Product Name
+        </th>
+        <th>
+           Product Price
+        </th>
+        <th>
+            Action
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Product_Name
+        </td>
+        <td>
+            @item.Product_Price
+        </td>
+        
+        <td>
+            <a href="/Productiteams/Add/@item.Product_ID">Add To Cart</a>
+         
+        </td>
+    </tr>
+}
+
+</table>
